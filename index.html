@@ -592,7 +592,7 @@
           { question: '买东西只挑最便宜的，不用考虑质量。', options: ['正确', '错误'], answer: 1, tip: '性价比才是关键，质量差的便宜货可能更"贵"。' },
           { question: '如果我不小心弄丢了同学的文具，应该主动赔偿。', options: ['正确', '错误'], answer: 0, tip: '承担责任是诚信的表现，也是财商的一部分。' },
           { question: '投资只是大人的事，小学生不需要了解。', options: ['正确', '错误'], answer: 1, tip: '从小了解投资的基本概念，长大后才能更好地理财。' },
-          { question: '信用卡的钱是银行送的，可以随便花。', options: ['正确', '错误'], answer: 0, tip: '信用卡的钱是借来的，必须按时还，否则会影响信用。' },
+          { question: '信用卡的钱是银行送的，可以随便花。', options: ['正确', '错误'], answer: 1, tip: '信用卡的钱是借来的，必须按时还，否则会影响信用。' },
           { question: '用自己的劳动换取报酬，比如做家务或摆摊，是体验赚钱的好方式。', options: ['正确', '错误'], answer: 0, tip: '劳动赚钱能让你更理解钱的来之不易。' },
           { question: '如果我有100元，我只花50元，剩下50元存起来，这叫"量入为出"。', options: ['正确', '错误'], answer: 1, tip: '花的钱不超过赚的钱，是理财的基本原则。' },
           { question: '商品的价格永远等于它的价值。', options: ['正确', '错误'], answer: 1, tip: '价格受供需、品牌等因素影响，不一定完全反映真实价值。' },
@@ -746,6 +746,60 @@
             cell.innerHTML = `<div class="cell-icon">${cellIcons[i]}</div><div class="cell-name">${cellLabels[i]}</div>`
             boardEl.appendChild(cell)
           }
+          
+                   // 添加格子间的箭头
+          setTimeout(() => {
+            const boardRect = boardEl.getBoundingClientRect()
+            const cellWidth = (boardRect.width - 20) / 5
+            const cellHeight = (boardRect.height - 30) / 5
+            
+            // 箭头位置映射表（根据回形路径计算）
+            const arrowPositions = [
+              // 第1行 左→右 (0→1, 1→2, 2→3, 3→4)
+              { row: 0.5, col:1, arrow: '➡️' },
+              { row: 0.5, col: 2.05, arrow: '➡️' },
+              { row: 0.5, col: 3.05, arrow: '➡️' },
+              { row: 0.5, col: 4.05, arrow: '➡️' },
+              { row: 1, col: 4.55, arrow: '⬇️' }, // 转角
+              // 右侧列 上→下 (4→5, 5→6, 6→7, 7→8)
+              { row: 2, col: 4.55, arrow: '⬇️' },
+              { row: 3.05, col: 4.55, arrow: '⬇️' },
+              { row: 4.05, col: 4.55, arrow: '⬇️' },
+              { row: 4.6, col: 4, arrow: '⬅️' }, // 转角
+              // 底行 右→左 (8→9, 9→10, 10→11, 11→12)
+              { row: 4.6, col: 3, arrow: '⬅️' },
+              { row: 4.6, col: 2, arrow: '⬅️' },
+              { row: 4.6, col: 1, arrow: '⬅️' },
+              { row: 4.15, col: 0.55, arrow: '⬆️' }, // 转角
+              // 左侧列 下→上 (12→13, 13→14, 14→15)
+              { row: 3.05, col: 0.55, arrow: '⬆️' },
+              { row: 2.05, col: 0.55, arrow: '⬆️' },// 转角进入内圈
+              // 第2行 左→右 (15→16, 16→17)
+              { row: 1.55, col: 1, arrow: '➡️' },
+              { row: 1.55, col: 2.05, arrow: '➡️' },
+              { row: 1.55, col: 3.05, arrow: '➡️' },
+              { row: 2.1, col: 3.55, arrow: '⬇️' }, // 转角
+              // 内圈右侧 上→下 (17→18, 18→19)
+              { row: 3.1, col: 3.55, arrow: '⬇️' },
+              { row: 3.6, col: 3, arrow: '⬅️' }, 
+              { row: 3.6, col: 2, arrow: '⬅️' },// 转角
+              // 内圈底行 右→左 (19→20)
+              { row: 3.05, col: 1.5, arrow: '⬆️' }, // 转角
+              // 内圈左侧 下→上 (20→21, 21→22)
+              { row: 2.55, col: 2, arrow: '➡️' }, // 最后指向中心
+            ]
+            
+            arrowPositions.forEach(pos => {
+              const arrowEl = document.createElement('div')
+              arrowEl.className = 'board-arrow'
+              arrowEl.textContent = pos.arrow
+              arrowEl.style.position = 'absolute'
+              arrowEl.style.left = `${(pos.col - 0.5) * cellWidth + cellWidth / 2}px`
+              arrowEl.style.top = `${(pos.row - 0.5) * cellHeight + cellHeight / 2}px`
+              arrowEl.style.transform = 'translate(-50%, -50%)'
+              boardEl.appendChild(arrowEl)
+            })
+          }, 100)
           
           updatePlayerMarker()
         }
