@@ -1,10 +1,10 @@
-<!doctype html>
-<html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+
+<!-- saved from url=(0012)about:srcdoc -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>🛡️ 金融反诈大冒险 · 智慧守护者</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&amp;display=swap" rel="stylesheet">
     <style>
       * {
         box-sizing: border-box;
@@ -341,6 +341,105 @@
         margin-left: 15px;
       }
 
+      /* ========== 反诈小贴士弹窗样式 ========== */
+      .tip-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+      }
+
+      .tip-card {
+        background: linear-gradient(145deg, #fff9f0 0%, #fff3e0 100%);
+        border: 6px solid #ff9800;
+        border-radius: 30px;
+        padding: 30px 35px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 
+          0 15px 0 #e65100,
+          0 20px 40px rgba(0, 0, 0, 0.3);
+        animation: popIn 0.3s ease-out;
+      }
+
+      @keyframes popIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      .tip-header {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        display: inline-block;
+      }
+
+      .tip-header.correct {
+        background: linear-gradient(135deg, #4caf50, #8bc34a);
+        color: white;
+        text-shadow: 2px 2px 0 #2e7d32;
+      }
+
+      .tip-header.wrong {
+        background: linear-gradient(135deg, #f44336, #ff5722);
+        color: white;
+        text-shadow: 2px 2px 0 #c62828;
+      }
+
+      .tip-content {
+        background: #fffdf5;
+        border: 3px solid #ffcc80;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 15px 0;
+        font-size: 1.4rem;
+        color: #5d4037;
+        line-height: 1.6;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .tip-move {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #e65100;
+        margin: 15px 0;
+        padding: 10px;
+        background: #fff3e0;
+        border-radius: 15px;
+        border: 3px dashed #ff9800;
+      }
+
+      .tip-confirm-btn {
+        background: linear-gradient(135deg, #ff9800, #ffc107);
+        border: none;
+        border-bottom: 8px solid #e65100;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #3e2723;
+        padding: 18px 50px;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 0 #bf360c;
+        transition: 0.08s;
+        font-family: inherit;
+        margin-top: 10px;
+      }
+      .tip-confirm-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 #bf360c;
+      }
+
       @media (max-width: 700px) {
         .game-container {
           padding: 16px;
@@ -361,6 +460,23 @@
         .question-text {
           font-size: 1.5rem;
         }
+        .tip-card {
+          padding: 20px 25px;
+        }
+        .tip-header {
+          font-size: 1.6rem;
+        }
+        .tip-content {
+          font-size: 1.2rem;
+          max-height: 150px;
+        }
+        .tip-move {
+          font-size: 1.3rem;
+        }
+        .tip-confirm-btn {
+          font-size: 1.4rem;
+          padding: 15px 40px;
+        }
       }
     </style>
   </head>
@@ -374,7 +490,7 @@
         </div>
       </div>
 
-      <div class="board" id="boardContainer"></div>
+      <div class="board" id="boardContainer"><div class="cell start-cell" data-index="0" data-path="0" style="grid-area: 1 / 1;"><div class="cell-icon">🏁</div><div class="cell-name">起点</div><div class="player-marker">👮</div></div><div class="cell" data-index="1" data-path="1" style="grid-area: 1 / 2;"><div class="cell-icon">💰</div><div class="cell-name">1</div></div><div class="cell" data-index="2" data-path="2" style="grid-area: 1 / 3;"><div class="cell-icon">💳</div><div class="cell-name">2</div></div><div class="cell" data-index="3" data-path="3" style="grid-area: 1 / 4;"><div class="cell-icon">📱</div><div class="cell-name">3</div></div><div class="cell" data-index="4" data-path="4" style="grid-area: 1 / 5;"><div class="cell-icon">⚠️</div><div class="cell-name">4</div></div><div class="cell" data-index="5" data-path="5" style="grid-area: 2 / 5;"><div class="cell-icon">🔍</div><div class="cell-name">5</div></div><div class="cell" data-index="6" data-path="6" style="grid-area: 3 / 5;"><div class="cell-icon">🛡️</div><div class="cell-name">6</div></div><div class="cell" data-index="7" data-path="7" style="grid-area: 4 / 5;"><div class="cell-icon">🚨</div><div class="cell-name">7</div></div><div class="cell" data-index="8" data-path="8" style="grid-area: 5 / 5;"><div class="cell-icon">🎭</div><div class="cell-name">8</div></div><div class="cell" data-index="9" data-path="9" style="grid-area: 5 / 4;"><div class="cell-icon">🎯</div><div class="cell-name">9</div></div><div class="cell" data-index="10" data-path="10" style="grid-area: 5 / 3;"><div class="cell-icon">💻</div><div class="cell-name">10</div></div><div class="cell" data-index="11" data-path="11" style="grid-area: 5 / 2;"><div class="cell-icon">📧</div><div class="cell-name">11</div></div><div class="cell" data-index="12" data-path="12" style="grid-area: 5 / 1;"><div class="cell-icon">🔗</div><div class="cell-name">12</div></div><div class="cell" data-index="13" data-path="13" style="grid-area: 4 / 1;"><div class="cell-icon">🔐</div><div class="cell-name">13</div></div><div class="cell" data-index="14" data-path="14" style="grid-area: 3 / 1;"><div class="cell-icon">📢</div><div class="cell-name">14</div></div><div class="cell" data-index="15" data-path="15" style="grid-area: 2 / 1;"><div class="cell-icon">👨‍👩‍👧</div><div class="cell-name">15</div></div><div class="cell" data-index="16" data-path="16" style="grid-area: 2 / 2;"><div class="cell-icon">🆔</div><div class="cell-name">16</div></div><div class="cell" data-index="17" data-path="17" style="grid-area: 2 / 3;"><div class="cell-icon">🏦</div><div class="cell-name">17</div></div><div class="cell" data-index="18" data-path="18" style="grid-area: 2 / 4;"><div class="cell-icon">🚔</div><div class="cell-name">18</div></div><div class="cell" data-index="19" data-path="19" style="grid-area: 3 / 4;"><div class="cell-icon">⚖️</div><div class="cell-name">19</div></div><div class="cell" data-index="20" data-path="20" style="grid-area: 4 / 4;"><div class="cell-icon">💡</div><div class="cell-name">20</div></div><div class="cell" data-index="21" data-path="21" style="grid-area: 4 / 3;"><div class="cell-icon">📖</div><div class="cell-name">21</div></div><div class="cell" data-index="22" data-path="22" style="grid-area: 4 / 2;"><div class="cell-icon">✅</div><div class="cell-name">22</div></div><div class="cell" data-index="23" data-path="23" style="grid-area: 3 / 2;"><div class="cell-icon">⭐</div><div class="cell-name">23</div></div><div class="cell end-cell" data-index="24" data-path="24" style="grid-area: 3 / 3;"><div class="cell-icon">🏆</div><div class="cell-name">终点</div></div></div>
 
       <div class="quiz-section">
         <div class="question-text" id="questionText">🛡️ 点击「开始闯关」学习反诈知识！</div>
@@ -397,26 +513,36 @@
     <!-- 通关界面 -->
     <div class="overlay-screen hidden" id="winScreen">
       <div class="win-card">
-        <h2>🎉 恭喜通关！</h2>
+        <h2 style="white-space: nowrap;">🎉 恭喜通关！</h2>
         <p>🛡️ 你是反诈小卫士</p>
         <div style="font-size: 4rem">🏆💰🎊</div>
         <button class="big-btn" id="playAgainBtn">✨ 再玩一次</button>
       </div>
     </div>
 
+    <!-- 反诈小贴士弹窗 -->
+    <div class="tip-overlay hidden" id="tipOverlay">
+      <div class="tip-card">
+        <div class="tip-header" id="tipHeader">反诈小贴士</div>
+        <div class="tip-content" id="tipContent">小贴士内容</div>
+        <div class="tip-move" id="tipMove">前进 2 格</div>
+        <button class="tip-confirm-btn" id="tipConfirmBtn">确定</button>
+      </div>
+    </div>
+
     <!-- 背景音乐 - 活泼的儿童游戏风格 -->
-    <audio id="bgMusic" loop preload="auto">
-      <source src="https://fffqwr.oss-cn-shanghai.aliyuncs.com/bgm.mp3" type="audio/mpeg" />
+    <audio id="bgMusic" loop="" preload="auto">
+      <source src="https://fffqwr.oss-cn-shanghai.aliyuncs.com/bgm.mp3" type="audio/mpeg">
     </audio>
     
     <!-- 答对音效 -->
     <audio id="correctSound" preload="auto">
-      <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=success-1-6297.mp3" type="audio/mpeg" />
+      <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c1539c.mp3?filename=success-1-6297.mp3" type="audio/mpeg">
     </audio>
     
     <!-- 答错音效 -->
     <audio id="wrongSound" preload="auto">
-      <source src="https://ffffhucgu.oss-cn-shanghai.aliyuncs.com/fff.mp3" type="audio/mpeg" />
+      <source src="https://ffffhucgu.oss-cn-shanghai.aliyuncs.com/fff.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -426,108 +552,108 @@
         // ========== 题库数据（从Excel导入 - 100道题）==========
         const QUESTIONS = [
           // === 理财小知识 (50题) ===
-          { question: '以下哪种行为是合理的储蓄习惯？', options: ['把所有的零花钱都花光', '把一部分零花钱存起来，留着以后用', '向同学借钱买东西'], answer: 1 },
-          { question: '如果你看到一款很喜欢的玩具，但价格很贵，你应该怎么做？', options: ['马上找爸妈要钱买', '先冷静想一想，是否真的需要，或者等打折时再考虑', '偷偷从家里拿钱去买'], answer: 1 },
-          { question: '"需要"和"想要"的区别是什么？', options: ['没有区别，都是想买的东西', '"需要"是生活必需的，"想要"是可有可无的', '"需要"是贵的，"想要"是便宜的'], answer: 1 },
-          { question: '小明的压岁钱收到了2000元，以下哪种分配方式最合理？', options: ['全部拿来买游戏装备', '全部存起来不动', '一部分存起来，一部分用来买学习用品，一小部分作为零花'], answer: 2 },
-          { question: '如果你借了同学10元钱，你应该怎么做？', options: ['假装忘记了', '等同学催了再还', '按时归还，信守承诺'], answer: 2 },
-          { question: '以下哪个是银行储蓄的主要好处？', options: ['钱会变多（获得利息）', '银行会送礼物', '存钱后就不能取出来了'], answer: 0 },
-          { question: '什么是"预算"？', options: ['随便花钱，花完再说', '提前计划好收入和支出的安排', '把钱藏起来'], answer: 1 },
-          { question: '小明想买一个300元的书包，他每周零花钱是50元，如果每周存30元，需要几周才能买到？', options: ['6周', '10周', '15周'], answer: 1 },
-          { question: '以下哪种做法能帮助你养成记账的好习惯？', options: ['每天记录收入和支出', '月底想起来再记', '不记，反正钱不多'], answer: 0 },
-          { question: '"价格"和"价值"的关系，以下说法正确的是？', options: ['价格高的东西价值一定高', '价格低的东西没有价值', '价格不一定等于价值，要看你是否真的需要'], answer: 2 },
-          { question: '以下哪个是"理性消费"的表现？', options: ['看到别人买，自己也跟着买', '买东西前，先比较价格和质量', '只买最贵的东西'], answer: 1 },
-          { question: '什么是"通货膨胀"？', options: ['钱变得更值钱了', '物价上涨，钱的购买力下降', '银行利息变高'], answer: 1 },
-          { question: '如果你中了100元彩票，以下哪种处理方式最明智？', options: ['马上全部花掉', '拿出一部分庆祝，剩下的存起来或买需要的东西', '再买100元彩票'], answer: 1 },
-          { question: '关于"借钱消费"，以下说法正确的是？', options: ['借钱买东西很酷', '借钱消费要谨慎，因为需要还本付息，可能带来压力', '借钱不用还'], answer: 1 },
-          { question: '以下哪个是"资产"？', options: ['能为你带来收入的东西，比如储蓄、出租的房子', '你欠别人的钱', '每天花掉的钱'], answer: 0 },
-          { question: '你看到一款玩具，标价"原价200元，现价5折"，打完折是多少钱？', options: ['100元', '150元', '50元'], answer: 0 },
-          { question: '以下哪个是"被动收入"？', options: ['帮爸妈做家务赚的钱', '存款利息', '过年收到的压岁钱'], answer: 1 },
-          { question: '如果你的朋友向你推荐一个"稳赚不赔"的投资项目，你应该怎么做？', options: ['马上投钱，机会难得', '保持警惕，世上没有稳赚不赔的事，先问家长', '借钱去投资'], answer: 1 },
-          { question: '以下哪个是合理的"零花钱管理"方式？', options: ['周初花完，周末再找爸妈要', '分成"储蓄""消费""爱心"三份，按计划使用', '全部存起来，一分不花'], answer: 1 },
-          { question: '什么是"复利"？', options: ['利息不产生利息', '利滚利，本金和利息一起继续生息', '银行扣的手续费'], answer: 1 },
-          { question: '小红的妈妈给她100元让她去超市买一周的零食，以下哪种做法最合理？', options: ['第一天全部买完自己喜欢的零食', '先列个清单，按需购买，剩下的存起来', '买最便宜的零食，把钱省下来买玩具'], answer: 1 },
-          { question: '关于"捐赠"或"慈善"，以下说法正确的是？', options: ['只有有钱人才能做慈善', '在自己有能力的情况下，帮助有需要的人，是一种美德', '捐赠是浪费钱'], answer: 1 },
-          { question: '如果你在网购时看到一个商品"限时秒杀"倒计时，你应该？', options: ['赶紧下单，慢了就没了', '先冷静，确认是否真的需要，再对比价格', '不管需要不需要，先买下来再说'], answer: 1 },
-          { question: '以下哪种情况属于"攀比消费"？', options: ['因为同学有最新款球鞋，所以自己也要买', '自己的鞋子坏了，买一双新鞋', '用自己的零花钱给妈妈买生日礼物'], answer: 0 },
-          { question: '"基金"是什么？', options: ['存钱罐', '一种将很多人钱集中起来，由专业的人去投资的方式', '银行送的小礼品'], answer: 1 },
-          { question: '以下哪个是"风险"在理财中的含义？', options: ['一定能赚钱', '投资可能亏钱的不确定性', '银行倒闭'], answer: 1 },
-          { question: '小明想买一个200元的乐高，但他只有150元，以下哪种做法最合适？', options: ['向同学借钱，凑够200元买', '再攒一段时间，等钱够了再买', '让爸妈补贴，马上买'], answer: 1 },
-          { question: '"信用记录"对一个人有什么影响？', options: ['没有影响', '会影响未来贷款买房、买车等', '只影响网购'], answer: 1 },
-          { question: '以下哪个是"保值"的意思？', options: ['让钱不变少，至少跑赢通货膨胀', '让钱翻倍', '把钱藏在家里'], answer: 0 },
-          { question: '关于"赚钱"和"花钱"，以下哪种观念是正确的？', options: ['赚钱是大人的事，小孩只管花', '钱是通过劳动和智慧创造的，要珍惜每一分钱', '赚钱很容易，不用珍惜'], answer: 1 },
-          { question: '钱存在家里比存在银行更安全。', options: ['正确', '错误'], answer: 1 },
-          { question: '只要东西打折，就应该买，不管需不需要。', options: ['正确', '错误'], answer: 1 },
-          { question: '学会记账能帮助我控制不必要的开支。', options: ['正确', '错误'], answer: 0 },
-          { question: '压岁钱是长辈的心意，我可以随意花，不用规划。', options: ['正确', '错误'], answer: 1 },
-          { question: '借钱给朋友时，不用写借条，因为是朋友。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果我有100元，全部买成股票，一定能赚更多钱。', options: ['正确', '错误'], answer: 1 },
-          { question: '存钱的目标越具体，越容易坚持下去。', options: ['正确', '错误'], answer: 0 },
-          { question: '买东西只挑最便宜的，不用考虑质量。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果我不小心弄丢了同学的文具，应该主动赔偿。', options: ['正确', '错误'], answer: 0 },
-          { question: '投资只是大人的事，小学生不需要了解。', options: ['正确', '错误'], answer: 1 },
-          { question: '信用卡的钱是银行送的，可以随便花。', options: ['正确', '错误'], answer: 0 },
-          { question: '用自己的劳动换取报酬，比如做家务或摆摊，是体验赚钱的好方式。', options: ['正确', '错误'], answer: 0 },
-          { question: '如果我有100元，我只花50元，剩下50元存起来，这叫"量入为出"。', options: ['正确', '错误'], answer: 1 },
-          { question: '商品的价格永远等于它的价值。', options: ['正确', '错误'], answer: 0 },
-          { question: '我可以用零花钱给家人买小礼物，表达心意。', options: ['正确', '错误'], answer: 0 },
-          { question: '银行的利息和投资的分红，都属于"被动收入"。', options: ['正确', '错误'], answer: 1 },
-          { question: '看到同学买了新东西，我也一定要买，不然会被笑话。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果我中了500万彩票，我可以不上学了。', options: ['正确', '错误'], answer: 1 },
-          { question: '通过参加"轻松赚钱"的广告，不用劳动就能赚大钱，这很可能是个骗局。', options: ['正确', '错误'], answer: 0 },
-          { question: '理财就是"怎么省钱"，和"怎么赚钱"没关系。', options: ['正确', '错误'], answer: 1 },
+          { question: '以下哪种行为是合理的储蓄习惯？', options: ['把一部分零花钱存起来，留着以后用', '把所有的零花钱都花光', '向同学借钱买东西'], answer: 0, tip: '学会"先存后花"是理财的第一步，哪怕只存10%，也能积少成多。' },
+          { question: '如果你看到一款很喜欢的玩具，但价格很贵，你应该怎么做？', options: ['马上找爸妈要钱买', '先冷静想一想，是否真的需要，或者等打折时再考虑', '偷偷从家里拿钱去买'], answer: 1, tip: '学会"延迟满足"，给自己冷静期，能避免冲动消费。' },
+          { question: '"需要"和"想要"的区别是什么？', options: ['没有区别，都是想买的东西', '"需要"是生活必需的，"想要"是可有可无的', '"需要"是贵的，"想要"是便宜的'], answer: 1, tip: '买"需要"的东西，偶尔奖励自己"想要"的东西，但要控制比例。' },
+          { question: '小明的压岁钱收到了2000元，以下哪种分配方式最合理？', options: ['一部分存起来，一部分用来买学习用品，一小部分作为零花', '全部存起来不动', '全部拿来买游戏装备'], answer: 0, tip: '压岁钱可以按"储蓄+消费+分享"的方式分配，学会规划。' },
+          { question: '如果你借了同学10元钱，你应该怎么做？', options: ['假装忘记了', '等同学催了再还', '按时归还，信守承诺'], answer: 2, tip: '信用是人的无形资产，按时还钱才能赢得别人的信任。' },
+          { question: '以下哪个是银行储蓄的主要好处？', options: ['钱会变多（获得利息）', '银行会送礼物', '存钱后就不能取出来了'], answer: 0, tip: '把钱存银行不仅安全，还能获得利息，让钱"生"钱。' },
+          { question: '什么是"预算"？', options: ['随便花钱，花完再说', '提前计划好收入和支出的安排', '把钱藏起来'], answer: 1, tip: '做预算就像给钱做"行程表"，让你知道钱该花在哪儿。' },
+          { question: '小明想买一个300元的书包，他每周零花钱是50元，如果每周存30元，需要几周才能买到？', options: ['6周', '10周', '15周'], answer: 1, tip: '通过计算和规划，你会明白攒钱需要耐心，也会更珍惜买到的物品。' },
+          { question: '以下哪种做法能帮助你养成记账的好习惯？', options: ['每天记录收入和支出', '月底想起来再记', '不记，反正钱不多'], answer: 0, tip: '记账能让你清楚钱花在哪里，发现不必要的开支。' },
+          { question: '"价格"和"价值"的关系，以下说法正确的是？', options: ['价格高的东西价值一定高', '价格低的东西没有价值', '价格不一定等于价值，要看你是否真的需要'], answer: 2, tip: '一件东西对你的价值，取决于你用它做什么，而不是它的标价。' },
+          { question: '以下哪个是"理性消费"的表现？', options: ['看到别人买，自己也跟着买', '买东西前，先比较价格和质量', '只买最贵的东西'], answer: 1, tip: '理性消费就是"聪明地花钱"，不攀比，不盲从。' },
+          { question: '什么是"通货膨胀"？', options: ['钱变得更值钱了', '物价上涨，钱的购买力下降', '银行利息变高'], answer: 1, tip: '简单说，就是以前10元能买的东西，现在可能要12元了。' },
+          { question: '如果你中了100元彩票，以下哪种处理方式最明智？', options: ['马上全部花掉', '再买100元彩票', '拿出一部分庆祝，剩下的存起来或买需要的东西'], answer: 2, tip: '意外之财更要理性规划，而不是全部挥霍。' },
+          { question: '关于"借钱消费"，以下说法正确的是？', options: ['借钱买东西很酷', '借钱消费要谨慎，因为需要还本付息，可能带来压力', '借钱不用还'], answer: 1, tip: '借钱容易还钱难，除非必要，尽量不借钱消费。' },
+          { question: '以下哪个是"资产"？', options: ['能为你带来收入的东西，比如储蓄、出租的房子', '你欠别人的钱', '每天花掉的钱'], answer: 0, tip: '资产是能把钱放进你口袋的东西，负债是把钱从你口袋拿走的东西。' },
+          { question: '你看到一款玩具，标价"原价200元，现价5折"，打完折是多少钱？', options: ['100元', '150元', '50元'], answer: 0, tip: '学会算折扣，能帮你判断是不是真的划算。' },
+          { question: '以下哪个是"被动收入"？', options: ['帮爸妈做家务赚的钱', '存款利息', '过年收到的压岁钱'], answer: 1, tip: '被动收入就是你"躺着也能赚"的钱，比如利息、分红。' },
+          { question: '如果你的朋友向你推荐一个"稳赚不赔"的投资项目，你应该怎么做？', options: ['马上投钱，机会难得', '借钱去投资', '保持警惕，世上没有稳赚不赔的事，先问家长'], answer: 2, tip: '凡是说"稳赚不赔"的，基本都是骗局。投资有风险，不懂不投。' },
+          { question: '以下哪个是合理的"零花钱管理"方式？', options: ['周初花完，周末再找爸妈要', '分成"储蓄""消费""爱心"三份，按计划使用', '全部存起来，一分不花'], answer: 1, tip: '把钱分装在不同的"罐子"里，是培养理财习惯的好方法。' },
+          { question: '什么是"复利"？', options: ['利息不产生利息', '利滚利，本金和利息一起继续生息', '银行扣的手续费'], answer: 1, tip: '复利被称为世界第八大奇迹，越早开始储蓄，复利效果越惊人。' },
+          { question: '小红的妈妈给她100元让她去超市买一周的零食，以下哪种做法最合理？', options: ['先列个清单，按需购买，剩下的存起来', '第一天全部买完自己喜欢的零食', '买最便宜的零食，把钱省下来买玩具'], answer: 0, tip: '有计划的消费能让你既满足需求，又能学会节约。' },
+          { question: '关于"捐赠"或"慈善"，以下说法正确的是？', options: ['只有有钱人才能做慈善', '在自己有能力的情况下，帮助有需要的人，是一种美德', '捐赠是浪费钱'], answer: 1, tip: '理财不仅是管好自己的钱，也包括用钱传递善意。' },
+          { question: '如果你在网购时看到一个商品"限时秒杀"倒计时，你应该？', options: ['赶紧下单，慢了就没了', '不管需要不需要，先买下来再说', '先冷静，确认是否真的需要，再对比价格'], answer: 2, tip: '商家常用"限时""限量"制造紧迫感，不要被冲动牵着走。' },
+          { question: '以下哪种情况属于"攀比消费"？', options: ['因为同学有最新款球鞋，所以自己也要买', '自己的鞋子坏了，买一双新鞋', '用自己的零花钱给妈妈买生日礼物'], answer: 0, tip: '为面子花钱，最后只会让自己"累"。' },
+          { question: '"基金"是什么？', options: ['存钱罐', '一种将很多人钱集中起来，由专业的人去投资的方式', '银行送的小礼品'], answer: 1, tip: '基金适合没有太多投资经验的人，但仍需了解风险。' },
+          { question: '以下哪个是"风险"在理财中的含义？', options: ['一定能赚钱', '银行倒闭', '投资可能亏钱的不确定性'], answer: 2, tip: '收益越高，风险通常也越高。保住本金是第一位的。' },
+          { question: '小明想买一个200元的乐高，但他只有150元，以下哪种做法最合适？', options: ['向同学借钱，凑够200元买', '再攒一段时间，等钱够了再买', '让爸妈补贴，马上买'], answer: 1, tip: '通过自己攒钱买到的物品，你会更珍惜，也学会了为目标坚持。' },
+          { question: '"信用记录"对一个人有什么影响？', options: ['没有影响', '只影响网购', '会影响未来贷款买房、买车等'], answer: 2, tip: '良好的信用记录是"经济身份证"，从小就要重视诚信。' },
+          { question: '以下哪个是"保值"的意思？', options: ['让钱不变少，至少跑赢通货膨胀', '让钱翻倍', '把钱藏在家里'], answer: 0, tip: '如果钱存着不理财，通货膨胀会让它慢慢"缩水"。' },
+          { question: '关于"赚钱"和"花钱"，以下哪种观念是正确的？', options: ['赚钱是大人的事，小孩只管花', '钱是通过劳动和智慧创造的，要珍惜每一分钱', '赚钱很容易，不用珍惜'], answer: 1, tip: '理解钱的来之不易，才能学会珍惜和感恩。' },
+          { question: '钱存在家里比存在银行更安全。', options: ['正确', '错误'], answer: 1, tip: '银行受国家存款保险制度保护，存在银行更安全，还能获得利息。' },
+          { question: '只要东西打折，就应该买，不管需不需要。', options: ['正确', '错误'], answer: 1, tip: '不需要的东西，哪怕免费也是一种浪费。' },
+          { question: '学会记账能帮助我控制不必要的开支。', options: ['正确', '错误'], answer: 0, tip: '记账是理财的基础，能让你看清钱的去向。' },
+          { question: '压岁钱是长辈的心意，我可以随意花，不用规划。', options: ['正确', '错误'], answer: 1, tip: '压岁钱是学习理财的好机会，合理规划能让它更有意义。' },
+          { question: '借钱给朋友时，不用写借条，因为是朋友。', options: ['正确', '错误'], answer: 1, tip: '好朋友之间更要明算账，借条是保护双方权益的方式。' },
+          { question: '如果我有100元，全部买成股票，一定能赚更多钱。', options: ['正确', '错误'], answer: 1, tip: '股票有涨有跌，可能赚钱也可能亏钱，不要把鸡蛋放在一个篮子里。' },
+          { question: '存钱的目标越具体，越容易坚持下去。', options: ['正确', '错误'], answer: 0, tip: '比如"我要存500元买一本书"，比"我要存钱"更容易实现。' },
+          { question: '买东西只挑最便宜的，不用考虑质量。', options: ['正确', '错误'], answer: 1, tip: '性价比才是关键，质量差的便宜货可能更"贵"。' },
+          { question: '如果我不小心弄丢了同学的文具，应该主动赔偿。', options: ['正确', '错误'], answer: 0, tip: '承担责任是诚信的表现，也是财商的一部分。' },
+          { question: '投资只是大人的事，小学生不需要了解。', options: ['正确', '错误'], answer: 1, tip: '从小了解投资的基本概念，长大后才能更好地理财。' },
+          { question: '信用卡的钱是银行送的，可以随便花。', options: ['正确', '错误'], answer: 0, tip: '信用卡的钱是借来的，必须按时还，否则会影响信用。' },
+          { question: '用自己的劳动换取报酬，比如做家务或摆摊，是体验赚钱的好方式。', options: ['正确', '错误'], answer: 0, tip: '劳动赚钱能让你更理解钱的来之不易。' },
+          { question: '如果我有100元，我只花50元，剩下50元存起来，这叫"量入为出"。', options: ['正确', '错误'], answer: 1, tip: '花的钱不超过赚的钱，是理财的基本原则。' },
+          { question: '商品的价格永远等于它的价值。', options: ['正确', '错误'], answer: 1, tip: '价格受供需、品牌等因素影响，不一定完全反映真实价值。' },
+          { question: '我可以用零花钱给家人买小礼物，表达心意。', options: ['正确', '错误'], answer: 0, tip: '用钱表达爱和感恩，是金钱的正向价值。' },
+          { question: '银行的利息和投资的分红，都属于"被动收入"。', options: ['正确', '错误'], answer: 1, tip: '被动收入让你不用工作也能有收入，是财务自由的基础。' },
+          { question: '看到同学买了新东西，我也一定要买，不然会被笑话。', options: ['正确', '错误'], answer: 1, tip: '真正的自信不需要靠物品证明，不攀比是成熟的标志。' },
+          { question: '如果我中了500万彩票，我可以不上学了。', options: ['正确', '错误'], answer: 1, tip: '金钱不能替代知识和能力，学习和成长才是一辈子的财富。' },
+          { question: '通过参加"轻松赚钱"的广告，不用劳动就能赚大钱，这很可能是个骗局。', options: ['正确', '错误'], answer: 0, tip: '天上不会掉馅饼，任何"不劳而获"的承诺都要警惕。' },
+          { question: '理财就是"怎么省钱"，和"怎么赚钱"没关系。', options: ['正确', '错误'], answer: 1, tip: '理财包括赚钱、花钱、存钱、投资、保障等，是一个完整的体系。' },
           
           // === 反诈小知识 (50题) ===
-          { question: '你在玩手机游戏时，有陌生人发消息说"加QQ群免费领游戏皮肤"，你应该怎么做？', options: ['马上加群领取，机会难得', '不相信，告诉家长并举报', '先加群看看，如果不让充值再退出来'], answer: 1 },
-          { question: '你在二手平台看到有人低价卖高等级的"游戏账号"，对方让你直接微信转账，不要走平台，因为"平台手续费高"。此时你应该？', options: ['为了省钱直接微信转账', '坚持通过正规平台交易', '只要价格够低，怎么付都行'], answer: 1 },
-          { question: '有人在游戏里自称是"代练"，说只要给他账号密码，就能帮你快速上分，你应该？', options: ['把账号密码给他，反正没什么钱', '给他一半密码，试探一下', '坚决不给，账号密码不能告诉任何人'], answer: 2 },
-          { question: '你在QQ上收到好朋友"小明"发来的消息，说他受伤在医院急用钱，发了一个收款码，让你扫码转200元给他，你应该？', options: ['朋友有难，马上转账', '打电话或当面找小明核实', '先转一半，剩下的明天再说'], answer: 1 },
-          { question: '如果你的QQ或微信被盗，你应该第一时间怎么做？', options: ['不管它，反正号不要了', '赶紧通知亲朋好友，提醒他们不要上当，并尝试找回密码', '在空间发一条说说骂盗号的人'], answer: 1 },
-          { question: '有个网友和你聊了很久，你觉得很投缘，对方约你周末去公园见面，你应该？', options: ['一个人偷偷去赴约', '叫上同学一起去', '拒绝，并将情况告诉家长，网友见面风险极高'], answer: 2 },
-          { question: '你在短视频平台看到喜欢的明星过生日，评论区说"扫码进群领签名照和188元红包"，但扫码后提示"未成年人操作导致账户冻结"，需要拿家长手机"解冻"，这时你？', options: ['赶紧拿家长手机按对方说的做，不然要坐牢', '告诉家长，这是诈骗，千万不要转账', '很害怕，但先转一点试试看'], answer: 1 },
-          { question: '你的"爱豆"（偶像）建了一个粉丝群，群主说充值99元可以返利999元，充得越多返得越多，这属于？', options: ['粉丝福利，明星宠粉', '刷单返利类诈骗', '正常的粉丝应援活动'], answer: 1 },
-          { question: '你收到一条短信："恭喜你被抽中为幸运用户，获得笔记本电脑一台，点击链接填写信息即可领取。"你应该？', options: ['很开心，马上点击链接填写', '忽略或删除，不点击陌生链接', '转发给朋友一起领'], answer: 1 },
-          { question: '在社交平台看到有人卖"超低价全新iPhone"，远低于市场价，卖家让你先付定金，你该怎么做？', options: ['这么便宜，赶紧抢购', '天下没有免费的午餐，这很可能是骗局', '付一半定金，赌一把'], answer: 1 },
-          { question: '接到自称是"公安局"的电话，说你涉嫌犯罪，要求你把钱转到"安全账户"配合调查，你应该？', options: ['很害怕，赶紧按他说的转钱', '告诉对方自己未成年，没钱', '挂断电话，告诉家长，警察不会在网上办案'], answer: 2 },
-          { question: '网上有人发消息说："我知道你在看不良网站，我控制了你的摄像头，给我转500元，否则把你的视频发给通讯录好友。"你应该？', options: ['觉得丢人，转账求放过', '不理会，这是诈骗，直接拉黑举报', '跟他砍价，少给一点'], answer: 1 },
-          { question: '以下哪个密码安全性最高？', options: ['123456', '生日日期', '字母+数字+符号组合，且不同账号不同密码'], answer: 2 },
-          { question: '以下哪种行为最容易导致个人信息泄露？', options: ['在朋友圈晒没打码的火车票、飞机票', '下载国家反诈中心APP', '设置手机锁屏密码'], answer: 0 },
-          { question: '"验证码"相当于什么？', options: ['普通的数字串', '电子支付密码或身份证件，打死都不能告诉别人', '可以发给朋友帮他登录'], answer: 1 },
-          { question: '你在网上看到"打字员兼职，日入300元，会打字就能赚钱"，但需要先交200元"入职押金"，这是？', options: ['一份适合学生的高薪工作', '刷单返利类诈骗的前奏', '正常的入职手续'], answer: 1 },
-          { question: '同学跟你说，有个"刷单"的活，先垫钱买东西，之后本金和佣金一起返，一单能赚50元，你应该？', options: ['跟着同学一起赚钱', '拒绝，并提醒同学这是诈骗', '先刷一单试试水'], answer: 1 },
-          { question: '班级家长群里，有一个头像和班主任一样的人发消息："紧急通知，请家长缴纳资料费198元，扫描下方二维码缴费。"你应该提醒家长注意什么？', options: ['马上转账，别耽误学习', '打电话或当面与班主任核实，确认是否老师本人发的', '只要是老师发的就不会错'], answer: 1 },
-          { question: '你的手机突然收到一条短信，显示"学校通"发来的，内容是"某某同学家长，这是您孩子本学期的成绩单，请点击链接下载查看"，你应该？', options: ['立刻点击查看成绩', '转发给爸爸妈妈让他们点', '不点击，这是诈骗短信，可能含有木马病毒'], answer: 2 },
-          { question: '如果你发现自己或家长的钱被骗了，第一时间应该做什么？', options: ['自己想办法联系骗子把钱要回来', '因为怕被骂，不敢告诉任何人', '马上告诉家长，并拨打110报警或去派出所'], answer: 2 },
-          { question: '关于"国家反诈中心"APP，以下说法正确的是？', options: ['装了会窃取隐私，不能装', '是官方推出的反诈软件，能拦截诈骗电话，应该安装并开启预警', '只有老年人需要装，学生不需要'], answer: 1 },
-          { question: '以下哪个电话号码是全国反诈预警劝阻专线，接到这个电话说明你可能正在被骗？', options: ['110', '120', '96110'], answer: 2 },
-          { question: '在网上，有人要你拍摄"手持身份证"的照片发给他，理由是"验证身份，之后给你发红包"，你应该？', options: ['拍给他，反正照片不露脸', '拒绝，身份证照片不能随意发给陌生人', '打上马赛克发给他'], answer: 1 },
-          { question: '当你收到一条陌生短信，里面有一个链接，并说"你的ETC已过期，请点击链接重新认证"，你应该？', options: ['赶紧点开认证，以免影响出行', '先问一下父母，如果父母让点就点', '不点链接，这是钓鱼网站，目的是骗取银行卡信息'], answer: 2 },
-          { question: '下面哪句话是对的？', options: ['只要我没有钱，骗子就骗不到我，家长的钱跟我没关系', '骗子会诱导我用家长的手机转账，所以我也要了解反诈知识', '只有老年人才会被骗，小学生不会被骗'], answer: 1 },
-          { question: '你在路边捡到一张"刮刮卡"，刮开后显示中了"二等奖 5万元"，需要打电话领奖，你应该？', options: ['马上打电话领奖', '扔掉，这是骗局', '让爸妈帮我去领奖'], answer: 1 },
-          { question: '如果有人给你发了一个"红包链接"，点进去之后显示需要输入银行卡号和密码才能提现，你应该？', options: ['为了提现，赶紧输入', '关掉页面，这是诈骗', '输入假的号码试试'], answer: 1 },
-          { question: '骗子在掌握了你的姓名、学校、家庭住址后，更容易实施什么诈骗？', options: ['冒充绑架/车祸，对你的家长进行"紧急"诈骗', '网络游戏诈骗', '刷单诈骗'], answer: 0 },
-          { question: '以下哪个行为是安全的？', options: ['在网吧或公共电脑上登录网银后，直接关掉网页就走', '在手机上下载软件只去官方应用商店', '为了省事，把支付密码设为123456'], answer: 1 },
-          { question: '你作为初中生，想利用暑假赚点零花钱，以下哪种途径最安全？', options: ['在网上找"手工活外发"兼职，先交材料费', '在家长陪同下，去正规的书店或超市咨询小时工', '帮陌生人进行"电话推广"，每小时赚100元'], answer: 1 },
-          { question: '只要我不主动转账，扫一下陌生人发来的二维码也不会有什么风险。', options: ['正确', '错误'], answer: 1 },
-          { question: '在社交平台上，那些自称"网警"或"反诈中心"的人，说能帮我把被骗的钱追回来，但要收取"手续费"，我可以相信他。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果我发现被骗了，为了不让爸妈担心，应该自己先想办法解决，比如去网上找"黑客"追回钱。', options: ['正确', '错误'], answer: 1 },
-          { question: '接到陌生电话，对方能准确说出我的名字和学校，所以他就一定不是骗子。', options: ['正确', '错误'], answer: 1 },
-          { question: '因为我是未成年人，在游戏里充值的钱，按照法律规定，家长可以申请退款，所以我可以随便充值，反正能退。', options: ['正确', '错误'], answer: 1 },
-          { question: '手机或电脑定期查杀病毒，不随意连接公共免费WiFi进行支付操作，可以降低网络支付风险。', options: ['正确', '错误'], answer: 0 },
-          { question: '只要我没有银行卡，不参与网络赌博，我就不会触犯"帮信罪"。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果在网上被人威胁、恐吓，因为害怕被家长骂而选择隐瞒，这是正确的做法。', options: ['正确', '错误'], answer: 1 },
-          { question: '"免费送皮肤"的广告，只要是在游戏公屏上发的，就是官方活动，可以相信。', options: ['正确', '错误'], answer: 1 },
-          { question: '把手机借给同学打电话，没什么需要注意的。', options: ['正确', '错误'], answer: 1 },
-          { question: '在网上聊天时，不透露自己和家人的真实姓名、住址、学校、电话号码，是保护隐私的好习惯。', options: ['正确', '错误'], answer: 0 },
-          { question: '凡是要求"共享屏幕"的"客服"或"公检法"，都是骗子。共享屏幕等于让对方看到你的银行卡号和密码。', options: ['正确', '错误'], answer: 0 },
-          { question: '如果你的同学因为被骗而情绪低落，你应该嘲笑他"太笨了"。', options: ['正确', '错误'], answer: 1 },
-          { question: '96110是反诈预警劝阻电话，看到这个号码来电，可以拒接，因为不可能是真的。', options: ['正确', '错误'], answer: 1 },
-          { question: '在朋友圈看到"转发这条消息到三个群，就能领10元话费"，这是真的福利，可以转发。', options: ['正确', '错误'], answer: 1 },
-          { question: '"杀猪盘"是一种网络交友诱导投资赌博的诈骗方式，主要针对成年人，跟中小学生关系不大，所以不用了解。', options: ['正确', '错误'], answer: 1 },
-          { question: '如果骗子声称"你是未成年人，导致我们公司账户被冻结，你要拿你爸妈的手机来解冻，不然抓你爸妈坐牢"，这时候因为害怕爸妈坐牢，应该照做。', options: ['正确', '错误'], answer: 1 },
-          { question: '哪怕只是帮朋友"借"一下微信号，只要收了钱，如果这个微信号被拿去诈骗，我也没事。', options: ['正确', '错误'], answer: 1 },
-          { question: '家长应该多跟孩子交流网络诈骗案例，并设置免密支付的限额，避免大额资金被转走。', options: ['正确', '错误'], answer: 0 },
-          { question: '我已经安装了国家反诈中心APP，就可以随便点击陌生链接了。', options: ['正确', '错误'], answer: 1 },
+          { question: '你在玩手机游戏时，有陌生人发消息说"加QQ群免费领游戏皮肤"，你应该怎么做？', options: ['不相信，告诉家长并举报', '马上加群领取，机会难得', '先加群看看，如果不让充值再退出来'], answer: 0, tip: '免费领皮肤是中小学生被骗最多的套路！骗子会以"账号异常""未成年操作"为由恐吓你，让你用家长手机转账。' },
+          { question: '你在二手平台看到有人低价卖高等级的"游戏账号"，对方让你直接微信转账，不要走平台，因为"平台手续费高"。此时你应该？', options: ['为了省钱直接微信转账', '坚持通过正规平台交易', '只要价格够低，怎么付都行'], answer: 1, tip: '凡是绕过正规平台私下交易的，基本都是诈骗。钱转过去后，对方可能直接拉黑，或者通过"账号找回"功能把卖给你的账号再拿回去。' },
+          { question: '有人在游戏里自称是"代练"，说只要给他账号密码，就能帮你快速上分，你应该？', options: ['把账号密码给他，反正没什么钱', '给他一半密码，试探一下', '坚决不给，账号密码不能告诉任何人'], answer: 2, tip: '把账号密码告诉陌生人，不仅会被盗号，骗子还可能用你的账号去诈骗你的好友。' },
+          { question: '你在QQ上收到好朋友"小明"发来的消息，说他受伤在医院急用钱，发了一个收款码，让你扫码转200元给他，你应该？', options: ['打电话或当面找小明核实', '朋友有难，马上转账', '先转一半，剩下的明天再说'], answer: 0, tip: '这是典型的冒充熟人诈骗。盗号后，骗子会群发消息借钱，一定要通过电话或见面核实。' },
+          { question: '如果你的QQ或微信被盗，你应该第一时间怎么做？', options: ['不管它，反正号不要了', '赶紧通知亲朋好友，提醒他们不要上当，并尝试找回密码', '在空间发一条说说骂盗号的人'], answer: 1, tip: '第一时间通知亲友，可以防止骗子利用你的身份去骗你身边的人。' },
+          { question: '有个网友和你聊了很久，你觉得很投缘，对方约你周末去公园见面，你应该？', options: ['一个人偷偷去赴约', '叫上同学一起去', '拒绝，并将情况告诉家长，网友见面风险极高'], answer: 2, tip: '网络对面的人性别、年龄、身份都可能是假的。中小学生绝对不要单独约见网友。' },
+          { question: '你在短视频平台看到喜欢的明星过生日，评论区说"扫码进群领签名照和188元红包"，但扫码后提示"未成年人操作导致账户冻结"，需要拿家长手机"解冻"，这时你？', options: ['赶紧拿家长手机按对方说的做，不然要坐牢', '告诉家长，这是诈骗，千万不要转账', '很害怕，但先转一点试试看'], answer: 1, tip: '这是针对追星学生的精准诈骗。骗子利用"未成年导致公司账户冻结"等借口恐吓学生，诱导偷拿家长手机转账。' },
+          { question: '你的"爱豆"（偶像）建了一个粉丝群，群主说充值99元可以返利999元，充得越多返得越多，这属于？', options: ['刷单返利类诈骗', '粉丝福利，明星宠粉', '正常的粉丝应援活动'], answer: 0, tip: '凡是"高额返利""充值返现"都是诈骗。明星不会在群里让你直接转账。' },
+          { question: '你收到一条短信："恭喜你被抽中为幸运用户，获得笔记本电脑一台，点击链接填写信息即可领取。"你应该？', options: ['很开心，马上点击链接填写', '忽略或删除，不点击陌生链接', '转发给朋友一起领'], answer: 1, tip: '这是钓鱼短信。陌生链接不要点，可能会盗取你的个人信息或让手机中毒。' },
+          { question: '在社交平台看到有人卖"超低价全新iPhone"，远低于市场价，卖家让你先付定金，你该怎么做？', options: ['天下没有免费的午餐，这很可能是骗局', '这么便宜，赶紧抢购', '付一半定金，赌一把'], answer: 0, tip: '贪小便宜吃大亏。网上购物一定要在正规平台进行，不要直接转账。' },
+          { question: '接到自称是"公安局"的电话，说你涉嫌犯罪，要求你把钱转到"安全账户"配合调查，你应该？', options: ['很害怕，赶紧按他说的转钱', '告诉对方自己未成年，没钱', '挂断电话，告诉家长，警察不会在网上办案'], answer: 2, tip: '公检法机关绝不会通过电话办案，更没有"安全账户"。凡是让你转账到"安全账户"的都是诈骗。' },
+          { question: '网上有人发消息说："我知道你在看不良网站，我控制了你的摄像头，给我转500元，否则把你的视频发给通讯录好友。"你应该？', options: ['觉得丢人，转账求放过', '不理会，这是诈骗，直接拉黑举报', '跟他砍价，少给一点'], answer: 1, tip: '这是"裸聊"敲诈的变种，但针对学生可能是"恐吓"诈骗。不要相信，直接拉黑，就算转了钱，对方还会继续勒索。' },
+          { question: '以下哪个密码安全性最高？', options: ['123456', '生日日期', '字母+数字+符号组合，且不同账号不同密码'], answer: 2, tip: '简单的密码容易被黑客"撞库"破解。' },
+          { question: '以下哪种行为最容易导致个人信息泄露？', options: ['在朋友圈晒没打码的火车票、飞机票', '下载国家反诈中心APP', '设置手机锁屏密码'], answer: 0, tip: '火车票上的二维码包含姓名、身份证号等信息，晒图前一定要打码。' },
+          { question: '"验证码"相当于什么？', options: ['普通的数字串', '电子支付密码或身份证件，打死都不能告诉别人', '可以发给朋友帮他登录'], answer: 1, tip: '验证码是资金安全的最后一道防线。任何人（包括自称客服、警察的人）索要验证码，都是骗子。' },
+          { question: '你在网上看到"打字员兼职，日入300元，会打字就能赚钱"，但需要先交200元"入职押金"，这是？', options: ['一份适合学生的高薪工作', '刷单返利类诈骗的前奏', '正常的入职手续'], answer: 1, tip: '所有"先交钱再工作"的兼职都是诈骗。学生找兼职一定要通过正规渠道，且需监护人陪同。' },
+          { question: '同学跟你说，有个"刷单"的活，先垫钱买东西，之后本金和佣金一起返，一单能赚50元，你应该？', options: ['跟着同学一起赚钱', '拒绝，并提醒同学这是诈骗', '先刷一单试试水'], answer: 1, tip: '刷单本身就是违法行为。前期返利几块钱是诱饵，后期会以"连单""卡单"为由让你投入更多，直到把你榨干。' },
+          { question: '班级家长群里，有一个头像和班主任一样的人发消息："紧急通知，请家长缴纳资料费198元，扫描下方二维码缴费。"你应该提醒家长注意什么？', options: ['马上转账，别耽误学习', '打电话或当面与班主任核实，确认是否老师本人发的', '只要是老师发的就不会错'], answer: 1, tip: '骗子会混进家长群，复制老师的头像和昵称进行诈骗。缴费一定要通过电话或当面核实。' },
+          { question: '你的手机突然收到一条短信，显示"学校通"发来的，内容是"某某同学家长，这是您孩子本学期的成绩单，请点击链接下载查看"，你应该？', options: ['立刻点击查看成绩', '转发给爸爸妈妈让他们点', '不点击，这是诈骗短信，可能含有木马病毒'], answer: 2, tip: '不明链接不要点。骗子常利用家长关心孩子成绩的心理进行诈骗。' },
+          { question: '如果你发现自己或家长的钱被骗了，第一时间应该做什么？', options: ['自己想办法联系骗子把钱要回来', '因为怕被骂，不敢告诉任何人', '马上告诉家长，并拨打110报警或去派出所'], answer: 2, tip: '被骗后不要慌张，不要害怕被骂。越早报警，止付冻结的成功率越高。' },
+          { question: '关于"国家反诈中心"APP，以下说法正确的是？', options: ['装了会窃取隐私，不能装', '是官方推出的反诈软件，能拦截诈骗电话，应该安装并开启预警', '只有老年人需要装，学生不需要'], answer: 1, tip: '这是国家公安部推出的"防骗神器"，建议学生和家长一起安装注册。' },
+          { question: '以下哪个电话号码是全国反诈预警劝阻专线，接到这个电话说明你可能正在被骗？', options: ['110', '120', '96110'], answer: 2, tip: '96110是反诈专用号码，来电一定要接听！12381是反诈预警短信。' },
+          { question: '在网上，有人要你拍摄"手持身份证"的照片发给他，理由是"验证身份，之后给你发红包"，你应该？', options: ['拍给他，反正照片不露脸', '拒绝，身份证照片不能随意发给陌生人', '打上马赛克发给他'], answer: 1, tip: '手持身份证照片是重要的个人隐私，一旦泄露，可能被骗子用来办理贷款或实施其他诈骗。' },
+          { question: '当你收到一条陌生短信，里面有一个链接，并说“你的游戏账号已过期，请点击链接重新认证”，你应该？', options: ['马上点击链接，按提示输入账号密码重新认证', '把短信转发给同学，让他们也注意一下', '不理会这条短信，告诉父母或老师，让大人帮忙判断'], answer: 2, tip: '💡 记住口诀： 陌生链接不要点，告诉爸妈来判断！' },
+          { question: '下面哪句话是对的？', options: ['只要我没有钱，骗子就骗不到我，家长的钱跟我没关系', '骗子会诱导我用家长的手机转账，所以我也要了解反诈知识', '只有老年人才会被骗，小学生不会被骗'], answer: 1, tip: '很多中小学生被骗是因为偷拿或诱导家长刷脸、输密码。学生也是反诈的重要一环。' },
+          { question: '你在路边捡到一张"刮刮卡"，刮开后显示中了"二等奖 5万元"，需要打电话领奖，你应该？', options: ['马上打电话领奖', '扔掉，这是骗局', '让爸妈帮我去领奖'], answer: 1, tip: '路边捡的中奖卡都是骗局。骗子会以"手续费""公证费"为由让你先交钱。' },
+          { question: '如果有人给你发了一个"红包链接"，点进去之后显示需要输入银行卡号和密码才能提现，你应该？', options: ['为了提现，赶紧输入', '关掉页面，这是诈骗', '输入假的号码试试'], answer: 1, tip: '正规的红包不需要输入银行卡密码。凡是需要输入支付信息的"红包"都是骗钱的。' },
+          { question: '骗子在掌握了你的姓名、学校、家庭住址后，更容易实施什么诈骗？', options: ['冒充绑架/车祸，对你的家长进行"紧急"诈骗', '网络游戏诈骗', '刷单诈骗'], answer: 0, tip: '信息泄露后，骗子可能会在屏蔽你手机信号的情况下，打电话给你家长谎称你被绑架，由于骗子能准确说出你的信息，家长很容易上当。' },
+          { question: '以下哪个行为是安全的？', options: ['在网吧或公共电脑上登录网银后，直接关掉网页就走', '为了省事，把支付密码设为123456', '在手机上下载软件只去官方应用商店'], answer: 2, tip: '官方应用商店的软件经过了安全检测。公共电脑使用后要清除上网记录，不要保存密码。' },
+          { question: '你作为初中生，想利用暑假赚点零花钱，以下哪种途径最安全？', options: ['在网上找"手工活外发"兼职，先交材料费', '在家长陪同下，去正规的书店或超市咨询小时工', '帮陌生人进行"电话推广"，每小时赚100元'], answer: 1, tip: '学生兼职一定要有监护人陪同。有些"电话推广"其实是帮助骗子拨打诈骗电话，属于"帮信罪"。' },
+          { question: '只要我不主动转账，扫一下陌生人发来的二维码也不会有什么风险。', options: ['正确', '错误'], answer: 1, tip: '二维码可能隐藏病毒链接或钓鱼网站，扫了之后可能导致账号被盗或资金被划走。' },
+          { question: '在社交平台上，那些自称"网警"或"反诈中心"的人，说能帮我把被骗的钱追回来，但要收取"手续费"，我可以相信他。', options: ['正确', '错误'], answer: 1, tip: '这是"二次诈骗"。追回被骗资金只能通过拨打110报警，网上自称能追回钱的都是骗子。' },
+          { question: '如果我发现被骗了，为了不让爸妈担心，应该自己先想办法解决，比如去网上找"黑客"追回钱。', options: ['正确', '错误'], answer: 1, tip: '同32题，网上所谓的"黑客""追回专家"都是骗子，不要病急乱投医。' },
+          { question: '接到陌生电话，对方能准确说出我的名字和学校，所以他就一定不是骗子。', options: ['正确', '错误'], answer: 1, tip: '个人信息可能通过快递单、填写不明问卷等方式泄露，能说出个人信息不代表对方是好人。' },
+          { question: '因为我是未成年人，在游戏里充值的钱，按照法律规定，家长可以申请退款，所以我可以随便充值，反正能退。', options: ['正确', '错误'], answer: 1, tip: '虽然法律有相关规定，但退款流程复杂且需证据，且容易遭遇"退款"类诈骗。更重要的是，要养成理性消费的习惯。' },
+          { question: '手机或电脑定期查杀病毒，不随意连接公共免费WiFi进行支付操作，可以降低网络支付风险。', options: ['正确', '错误'], answer: 0, tip: '良好的上网习惯是防范网络风险的基础。公共WiFi容易被黑客监听，不要在上面输入密码。' },
+          { question: '只要我没有银行卡，不参与网络赌博，我就不会触犯"帮信罪"。', options: ['正确', '错误'], answer: 1, tip: '中学生如果出租、出借自己的微信号、QQ号、手机卡给诈骗分子，同样可能构成"帮信罪"，这是违法犯罪行为。' },
+          { question: '如果在网上被人威胁、恐吓，因为害怕被家长骂而选择隐瞒，这是正确的做法。', options: ['正确', '错误'], answer: 1, tip: '遇到威胁恐吓，第一时间告诉家长或老师，他们是你最坚强的后盾。越隐瞒，骗子越得寸进尺。' },
+          { question: '"免费送皮肤"的广告，只要是在游戏公屏上发的，就是官方活动，可以相信。', options: ['正确', '错误'], answer: 1, tip: '游戏公屏上的广告绝大多数是骗子发布的。官方活动会在游戏内公告栏中显示。' },
+          { question: '把手机借给同学打电话，没什么需要注意的。', options: ['正确', '错误'], answer: 1, tip: '要警惕同学（或所谓的朋友）借用手机后，删除你的APP、更改支付密码，或利用你的手机号注册诈骗账号。' },
+          { question: '在网上聊天时，不透露自己和家人的真实姓名、住址、学校、电话号码，是保护隐私的好习惯。', options: ['正确', '错误'], answer: 0, tip: '天上不会掉馅饼，警惕一切诱惑！' },
+          { question: '凡是要求"共享屏幕"的"客服"或"公检法"，都是骗子。共享屏幕等于让对方看到你的银行卡号和密码。', options: ['正确', '错误'], answer: 0, tip: '天上不会掉馅饼，警惕一切诱惑！' },
+          { question: '如果你的同学因为被骗而情绪低落，你应该嘲笑他"太笨了"。', options: ['正确', '错误'], answer: 1, tip: '被骗不是受害者的错，是骗子的错。应该安慰同学，并陪他一起告诉老师或家长。' },
+          { question: '96110是反诈预警劝阻电话，看到这个号码来电，可以拒接，因为不可能是真的。', options: ['正确', '错误'], answer: 1, tip: '一定要接听！这说明你或者你的家人正在遭遇诈骗。' },
+          { question: '在朋友圈看到"转发这条消息到三个群，就能领10元话费"，这是真的福利，可以转发。', options: ['正确', '错误'], answer: 1, tip: '这是"引流"骗局，目的是获取你的个人信息或让你传播虚假广告。' },
+          { question: '"杀猪盘"是一种网络交友诱导投资赌博的诈骗方式，主要针对成年人，跟中小学生关系不大，所以不用了解。', options: ['正确', '错误'], answer: 1, tip: '中小学生虽然没钱投资，但可能成为"杀猪盘"中的"猪仔"（被诱导），或者因为家长身陷"杀猪盘"而影响家庭。' },
+          { question: '如果骗子声称"你是未成年人，导致我们公司账户被冻结，你要拿你爸妈的手机来解冻，不然抓你爸妈坐牢"，这时候因为害怕爸妈坐牢，应该照做。', options: ['正确', '错误'], answer: 1, tip: '这是骗子惯用的恐吓话术。公检法不会因为未成年人玩游戏就抓人。遇到这种情况，立刻告诉家长，千万不要独自操作手机。' },
+          { question: '哪怕只是帮朋友"借"一下微信号，只要收了钱，如果这个微信号被拿去诈骗，我也没事。', options: ['正确', '错误'], answer: 1, tip: '根据《反电信网络诈骗法》，非法出租、出借微信号、银行卡、电话卡，如果被用于诈骗，本人可能涉嫌"帮信罪"，会留下案底，并面临惩戒措施。' },
+          { question: '家长应该多跟孩子交流网络诈骗案例，并设置免密支付的限额，避免大额资金被转走。', options: ['正确', '错误'], answer: 0, tip: '天上不会掉馅饼，警惕一切诱惑！' },
+          { question: '我已经安装了国家反诈中心APP，就可以随便点击陌生链接了。', options: ['正确', '错误'], answer: 1, tip: '国家反诈中心APP能拦截大部分诈骗电话和短信，但不能100%保证绝对安全，自己提高警惕才是最重要的。' },
         ];
 
         const TOTAL_CELLS = 25
@@ -550,16 +676,27 @@
         const correctSound = document.getElementById('correctSound')
         const wrongSound = document.getElementById('wrongSound')
 
+        // 弹窗相关元素
+        const tipOverlay = document.getElementById('tipOverlay')
+        const tipHeader = document.getElementById('tipHeader')
+        const tipContent = document.getElementById('tipContent')
+        const tipMove = document.getElementById('tipMove')
+        const tipConfirmBtn = document.getElementById('tipConfirmBtn')
+
         // 状态
         let playerPos = 0
         let correctAnswers = 0
         let gameActive = false
         let gameFinished = false
         let currentQuestion = null
+        let currentQuestionIndex = -1
         let canAnswer = true
         let nextTimer = null
         let musicPlaying = false
         let usedQuestions = new Set()
+
+        // 待处理的答题结果
+        let pendingResult = null
 
         // 回形路径网格位置
         const GRID_POSITIONS = [
@@ -589,34 +726,6 @@
           '20', '21', '22', '23', '终点'
         ]
 
-        // 格子间箭头位置和方向
-        // 计算每个格子到下一个格子的箭头位置
-        function getArrowPosition(fromPos, toPos, boardRect) {
-          const cellWidth = (boardRect.width - 20) / 5
-          const cellHeight = (boardRect.height - 30) / 5
-          
-          const fromGrid = GRID_POSITIONS[fromPos]
-          const toGrid = GRID_POSITIONS[toPos]
-          
-          const fromX = fromGrid[1] * cellWidth + cellWidth / 2 + 10
-          const fromY = fromGrid[0] * cellHeight + cellHeight / 2 + 15
-          
-          const toX = toGrid[1] * cellWidth + cellWidth / 2 + 10
-          const toY = toGrid[0] * cellHeight + cellHeight / 2 + 15
-          
-          const midX = (fromX + toX) / 2
-          const midY = (fromY + toY) / 2
-          
-          // 判断方向
-          let arrow = '➡️'
-          if (toGrid[1] > fromGrid[1]) arrow = '➡️'
-          else if (toGrid[1] < fromGrid[1]) arrow = '⬅️'
-          else if (toGrid[0] > fromGrid[0]) arrow = '⬇️'
-          else if (toGrid[0] < fromGrid[0]) arrow = '⬆️'
-          
-          return { x: midX, y: midY, arrow: arrow }
-        }
-
         // 渲染棋盘
         function renderBoard() {
           boardEl.innerHTML = ''
@@ -637,60 +746,6 @@
             cell.innerHTML = `<div class="cell-icon">${cellIcons[i]}</div><div class="cell-name">${cellLabels[i]}</div>`
             boardEl.appendChild(cell)
           }
-          
-          // 添加格子间的箭头
-          setTimeout(() => {
-            const boardRect = boardEl.getBoundingClientRect()
-            const cellWidth = (boardRect.width - 20) / 5
-            const cellHeight = (boardRect.height - 30) / 5
-            
-            // 箭头位置映射表（根据回形路径计算）
-            const arrowPositions = [
-              // 第1行 左→右 (0→1, 1→2, 2→3, 3→4)
-              { row: 0.5, col:1, arrow: '➡️' },
-              { row: 0.5, col: 2.05, arrow: '➡️' },
-              { row: 0.5, col: 3.05, arrow: '➡️' },
-              { row: 0.5, col: 4.05, arrow: '➡️' },
-              { row: 1, col: 4.55, arrow: '⬇️' }, // 转角
-              // 右侧列 上→下 (4→5, 5→6, 6→7, 7→8)
-              { row: 2, col: 4.55, arrow: '⬇️' },
-              { row: 3.05, col: 4.55, arrow: '⬇️' },
-              { row: 4.05, col: 4.55, arrow: '⬇️' },
-              { row: 4.6, col: 4, arrow: '⬅️' }, // 转角
-              // 底行 右→左 (8→9, 9→10, 10→11, 11→12)
-              { row: 4.6, col: 3, arrow: '⬅️' },
-              { row: 4.6, col: 2, arrow: '⬅️' },
-              { row: 4.6, col: 1, arrow: '⬅️' },
-              { row: 4.15, col: 0.55, arrow: '⬆️' }, // 转角
-              // 左侧列 下→上 (12→13, 13→14, 14→15)
-              { row: 3.05, col: 0.55, arrow: '⬆️' },
-              { row: 2.05, col: 0.55, arrow: '⬆️' },// 转角进入内圈
-              // 第2行 左→右 (15→16, 16→17)
-              { row: 1.55, col: 1, arrow: '➡️' },
-              { row: 1.55, col: 2.05, arrow: '➡️' },
-              { row: 1.55, col: 3.05, arrow: '➡️' },
-              { row: 2.1, col: 3.55, arrow: '⬇️' }, // 转角
-              // 内圈右侧 上→下 (17→18, 18→19)
-              { row: 3.1, col: 3.55, arrow: '⬇️' },
-              { row: 3.6, col: 3, arrow: '⬅️' }, 
-              { row: 3.6, col: 2, arrow: '⬅️' },// 转角
-              // 内圈底行 右→左 (19→20)
-              { row: 3.05, col: 1.5, arrow: '⬆️' }, // 转角
-              // 内圈左侧 下→上 (20→21, 21→22)
-              { row: 2.55, col: 2, arrow: '➡️' }, // 最后指向中心
-            ]
-            
-            arrowPositions.forEach(pos => {
-              const arrowEl = document.createElement('div')
-              arrowEl.className = 'board-arrow'
-              arrowEl.textContent = pos.arrow
-              arrowEl.style.position = 'absolute'
-              arrowEl.style.left = `${(pos.col - 0.5) * cellWidth + cellWidth / 2}px`
-              arrowEl.style.top = `${(pos.row - 0.5) * cellHeight + cellHeight / 2}px`
-              arrowEl.style.transform = 'translate(-50%, -50%)'
-              boardEl.appendChild(arrowEl)
-            })
-          }, 100)
           
           updatePlayerMarker()
         }
@@ -718,7 +773,7 @@
             idx = Math.floor(Math.random() * QUESTIONS.length)
           } while (usedQuestions.has(idx))
           usedQuestions.add(idx)
-          return QUESTIONS[idx]
+          return { question: QUESTIONS[idx], index: idx }
         }
 
         // 播放音效
@@ -736,8 +791,9 @@
 
         function displayQuestion() {
           if (!gameActive || gameFinished) return
-          const q = getRandomQuestion()
+          const { question: q, index } = getRandomQuestion()
           currentQuestion = q
+          currentQuestionIndex = index
           questionText.textContent = q.question
           optionsDiv.innerHTML = ''
           q.options.forEach((opt, idx) => {
@@ -752,32 +808,42 @@
           canAnswer = true
         }
 
-        function onOptionClick(e) {
-          if (!gameActive || gameFinished || !canAnswer) return
-          const selectedIdx = parseInt(e.currentTarget.dataset.optionIndex)
-          const isCorrect = selectedIdx === currentQuestion.answer
-
-          canAnswer = false
-          document.querySelectorAll('.option-btn').forEach((btn) => btn.classList.add('disabled-touch'))
-
-          let moveDelta = isCorrect ? MOVE_CORRECT : MOVE_WRONG
-          let feedbackText = isCorrect ? `✅ 太棒了！前进 ${MOVE_CORRECT} 格！` : `❌ 答错了… 后退 1 格，继续加油！`
-
-          // 播放音效
+        // 显示反诈小贴士弹窗
+        function showTipModal(isCorrect, tip, moveDelta) {
           if (isCorrect) {
-            playCorrectSound()
-            correctAnswers++
+            tipHeader.textContent = '🎉 反诈小贴士 - 答对啦！'
+            tipHeader.className = 'tip-header correct'
           } else {
-            playWrongSound()
+            tipHeader.textContent = '⚠️ 反诈小贴士 - 答错了'
+            tipHeader.className = 'tip-header wrong'
           }
+          
+          tipContent.textContent = tip
+          
+          if (moveDelta > 0) {
+            tipMove.textContent = `✅ 前进 ${moveDelta} 格！`
+          } else {
+            tipMove.textContent = `❌ 后退 ${Math.abs(moveDelta)} 格`
+          }
+          
+          tipOverlay.classList.remove('hidden')
+        }
 
+        // 隐藏反诈小贴士弹窗并处理跳转
+        function hideTipModalAndMove() {
+          tipOverlay.classList.add('hidden')
+          
+          if (!pendingResult) return
+          
+          const { isCorrect, moveDelta } = pendingResult
+          pendingResult = null
+          
+          // 执行移动
           let newPos = Math.max(0, Math.min(TOTAL_CELLS - 1, playerPos + moveDelta))
           playerPos = newPos
           updatePlayerMarker()
-          updateProgressUI()
-          feedbackMsg.textContent = feedbackText + (isCorrect ? ' ⭐' : '')
-
-          // 通关判断
+          
+          // 检查通关
           if (correctAnswers >= WIN_CORRECT_COUNT) {
             gameFinished = true
             gameActive = false
@@ -792,14 +858,44 @@
             setTimeout(() => showWinScreen(), 500)
             return
           }
-
+          
+          // 显示下一题
           if (nextTimer) clearTimeout(nextTimer)
           nextTimer = setTimeout(() => {
             if (gameActive && !gameFinished) {
               document.querySelectorAll('.option-btn').forEach((btn) => btn.classList.remove('disabled-touch'))
               displayQuestion()
             }
-          }, 600)
+          }, 300)
+        }
+
+        function onOptionClick(e) {
+          if (!gameActive || gameFinished || !canAnswer) return
+          const selectedIdx = parseInt(e.currentTarget.dataset.optionIndex)
+          const isCorrect = selectedIdx === currentQuestion.answer
+
+          canAnswer = false
+          document.querySelectorAll('.option-btn').forEach((btn) => btn.classList.add('disabled-touch'))
+
+          let moveDelta = isCorrect ? MOVE_CORRECT : MOVE_WRONG
+          let feedbackText = isCorrect ? `✅ 正确！` : `❌ 答错了…`
+
+          // 播放音效
+          if (isCorrect) {
+            playCorrectSound()
+            correctAnswers++
+          } else {
+            playWrongSound()
+          }
+
+          // 保存待处理结果
+          pendingResult = { isCorrect, moveDelta }
+          
+          // 显示反馈
+          feedbackMsg.textContent = feedbackText + (isCorrect ? ' ⭐' : '')
+
+          // 显示反诈小贴士弹窗
+          showTipModal(isCorrect, currentQuestion.tip, moveDelta)
         }
 
         function showWinScreen() {
@@ -817,6 +913,7 @@
           gameActive = true
           canAnswer = true
           usedQuestions.clear()
+          pendingResult = null
 
           updatePlayerMarker()
           updateProgressUI()
@@ -825,6 +922,7 @@
           winScreen.classList.add('hidden')
 
           currentQuestion = null
+          currentQuestionIndex = -1
           displayQuestion()
         }
 
@@ -853,6 +951,9 @@
           musicPlaying ? pauseMusic() : playMusic()
         }
 
+        // 绑定确定按钮事件
+        tipConfirmBtn.addEventListener('click', hideTipModalAndMove)
+
         startBtn.addEventListener('click', startNewGame)
         playAgainBtn.addEventListener('click', startNewGame)
         resetGameBtn.addEventListener('click', () => {
@@ -863,12 +964,14 @@
           gameActive = true
           canAnswer = true
           usedQuestions.clear()
+          pendingResult = null
           updatePlayerMarker()
           updateProgressUI()
           startScreen.classList.add('hidden')
           winScreen.classList.add('hidden')
           feedbackMsg.textContent = '✨ 新的一局！加油 ✨'
           currentQuestion = null
+          currentQuestionIndex = -1
           displayQuestion()
         })
         musicToggle.addEventListener('click', toggleMusic)
@@ -892,5 +995,5 @@
         console.log('🛡️ 金融反诈大冒险已加载！题库共' + QUESTIONS.length + '道题')
       })()
     </script>
-  </body>
-</html>
+  
+</body></html>
